@@ -71,5 +71,5 @@ func SendUDPViaRaw(fd int, src, dst *net.UDPAddr, payload []byte) error {
 
 	addr := syscall.SockaddrInet4{Port: dst.Port}
 	copy(addr.Addr[:], data[16:20])
-	return syscall.Sendto(fd, data, 0, &addr)
+	return syscall.Sendto(syscall.Handle(fd), data, 0, &addr)
 }

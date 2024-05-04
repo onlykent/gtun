@@ -22,11 +22,11 @@ func NewInterface() (*Interface, error) {
 	}
 
 	for i := 0; i < 10; i++ {
-		ifconfig.Name = fmt.Sprintf("gtun.%d", i)
+		ifconfig.InterfaceName = fmt.Sprintf("gtun.%d", i)
 
 		ifce, err := water.New(ifconfig)
 		if err != nil {
-			logs.Error("new interface %s fail: %v", ifconfig.Name, err)
+			logs.Error("new interface %s fail: %v", ifconfig.InterfaceName, err)
 			time.Sleep(time.Second * 1)
 			continue
 		}
@@ -34,7 +34,7 @@ func NewInterface() (*Interface, error) {
 		iface.tun = ifce
 		return iface, nil
 	}
-	return nil, fmt.Errorf("new interface %s fail", ifconfig.Name)
+	return nil, fmt.Errorf("new interface %s fail", ifconfig.InterfaceName)
 }
 
 func (iface *Interface) SetMTU(mtu int) error {
